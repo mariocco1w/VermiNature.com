@@ -120,5 +120,19 @@ function loadContent(section) {
         `;
     }
 }
+function toggleMenu() {
+    document.getElementById("sidebar").classList.toggle("active");
+}
+
+function showSection(id) {
+    const sections = document.querySelectorAll(".section");
+
+    sections.forEach(sec => sec.classList.remove("active"));
+
+    document.getElementById(id).classList.add("active");
+
+    // cerrar menú después de elegir (detalle pro 😏)
+    document.getElementById("sidebar").classList.remove("active");
+}
 
 window.onload = () => loadContent("home");

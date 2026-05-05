@@ -1,33 +1,33 @@
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #eef2f3;
-}
-html {
-    scroll-behavior: smooth;
+    font-family: Arial;
 }
 
-section {
-    margin-bottom: 80px;
-}
-
-.container {
-    display: flex;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 260px;
-    background: linear-gradient(180deg, #2e7d32, #1b5e20);
+/* Botón ☰ */
+.menu-btn {
+    font-size: 30px;
+    padding: 15px;
+    cursor: pointer;
+    background: #2e7d32;
     color: white;
-    height: 100vh;
-    padding: 20px;
-    position: fixed;
 }
 
-.sidebar h2 {
-    text-align: center;
-    margin-bottom: 20px;
+/* Sidebar oculto */
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #1b5e20;
+    color: white;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+/* Sidebar visible */
+.sidebar.active {
+    left: 0;
 }
 
 .sidebar ul {
@@ -36,22 +36,27 @@ section {
 }
 
 .sidebar li {
-    padding: 12px;
-    border-radius: 8px;
+    padding: 10px;
     cursor: pointer;
-    margin-bottom: 8px;
-    transition: 0.3s;
 }
 
 .sidebar li:hover {
     background: rgba(255,255,255,0.2);
 }
 
-/* Content */
+/* Contenido */
 .content {
-    margin-left: 280px;
-    padding: 40px;
-    width: 100%;
+    padding: 20px;
+}
+
+/* Secciones ocultas */
+.section {
+    display: none;
+}
+
+/* Sección visible */
+.section.active {
+    display: block;
 }
 
 /* Cards */
@@ -69,4 +74,11 @@ h1 {
 
 h2 {
     color: #1b5e20;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    margin-bottom: 80px;
 }
