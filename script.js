@@ -10,6 +10,18 @@ function toggleMenu() {
         content.style.marginLeft = "0px";
     }
 }
+function toggleMenu() {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const content = document.querySelector(".content");
+
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
+
+    if (window.innerWidth > 768) {
+        content.style.marginLeft = sidebar.classList.contains("active") ? "260px" : "0px";
+    }
+}
 function showSection(id) {
     const sections = document.querySelectorAll(".section");
 
