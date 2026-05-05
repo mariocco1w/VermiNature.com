@@ -14,3 +14,4 @@ function showSection(id) {
     // cerrar menú automáticamente
     document.getElementById("sidebar").classList.remove("active");
 }
+window.onload = () => showSection('inicio');
