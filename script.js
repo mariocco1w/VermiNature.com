@@ -23,3 +23,38 @@ function showSection(id) {
     document.getElementById("sidebar").classList.remove("active");
 }
 window.onload = () => showSection('inicio');
+
+// ===== GRÁFICA 1: INVERSIÓN =====
+new Chart(document.getElementById("inversionChart"), {
+    type: 'pie',
+    data: {
+        labels: ['Infraestructura', 'Equipo', 'Capital de trabajo'],
+        datasets: [{
+            data: [4927000, 122000, 521800],
+        }]
+    }
+});
+
+// ===== GRÁFICA 2: COSTOS VS INGRESOS =====
+new Chart(document.getElementById("costosChart"), {
+    type: 'bar',
+    data: {
+        labels: ['Costos Fijos', 'Costos Variables', 'Ventas', 'Utilidad'],
+        datasets: [{
+            label: 'Quetzales (Q)',
+            data: [221900, 39000, 486850, 225950],
+        }]
+    }
+});
+
+// ===== GRÁFICA 3: UTILIDAD (simple proyección) =====
+new Chart(document.getElementById("utilidadChart"), {
+    type: 'line',
+    data: {
+        labels: ['Mes 1', 'Mes 2', 'Mes 3', 'Mes 4', 'Mes 5'],
+        datasets: [{
+            label: 'Utilidad acumulada',
+            data: [225950, 451900, 677850, 903800, 1129750],
+        }]
+    }
+});
