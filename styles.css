@@ -1,48 +1,50 @@
+/* Reset básico */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
 
-/* Botón hamburguesa */
+/* BOTÓN HAMBURGUESA */
 .menu-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+
     font-size: 25px;
     padding: 10px 15px;
     cursor: pointer;
+
     background: #2e7d32;
     color: white;
-    width: fit-content;
-    border-radius: 5px;
-    margin: 10px;
 
-    position: fixed;   
-    top: 10px;
-    left: 10px;
-    z-index: 1000; 
+    border-radius: 6px;
+
+    z-index: 1000; /* 🔥 siempre arriba */
 }
 
-/* Sidebar */
+/* SIDEBAR */
 .sidebar {
     position: fixed;
-    left: -250px;
     top: 0;
-    width: 250px;
+    left: -260px; /* oculto */
+    width: 260px;
     height: 100%;
+
     background: #1b5e20;
     color: white;
+
     padding: 20px;
     transition: 0.3s;
-    z-index: 999;
+
+    z-index: 999; /* debajo del botón */
 }
 
-.content {
-    padding: 40px;
-    transition: margin-left 0.3s;
+/* cuando se abre */
+.sidebar.active {
+    left: 0;
 }
 
-.sidebar.active ~ .content {
-    margin-left: 250px;
-}
-
+/* contenido del sidebar */
 .sidebar h2 {
     text-align: center;
 }
@@ -53,32 +55,31 @@ body {
 }
 
 .sidebar li {
-    padding: 10px;
+    padding: 12px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 .sidebar li:hover {
     background: rgba(255,255,255,0.2);
 }
 
-/* Contenido */
+/* CONTENIDO PRINCIPAL */
 .content {
-    padding: 30px;
+    padding: 80px 30px 30px 30px; /* espacio arriba por el botón */
 }
 
-/* Secciones */
+/* SECCIONES */
 .section {
     display: none;
+    min-height: 80vh; /* evita que se vea vacío */
 }
 
 .section.active {
     display: block;
 }
-.section {
-    display: none;
-    min-height: 80vh;
-}
-.content {
-    padding: 40px;
+
+/* TITULOS */
+h1 {
+    margin-top: 0;
 }
