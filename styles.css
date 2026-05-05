@@ -191,6 +191,10 @@ canvas {
         padding: 18px;
         border-left: 4px solid #2e7d32;
     }
+    .card h3 {
+        color: #1b5e20;
+        margin-bottom: 10px;
+    }
 
     /* animación tipo app */
     .section {
@@ -207,5 +211,24 @@ canvas {
     canvas {
         width: 100% !important;
         height: auto !important;
+    }
+}
+.organigrama {
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+/* efecto suave */
+.organigrama:hover {
+    transform: scale(1.02);
+}
+
+/* mejora en móvil */
+@media (max-width: 768px) {
+    .organigrama {
+        border-radius: 8px;
     }
 }

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="styles.css">
+    <img src="img/organigrama.png">
 </head>
 <body>
 
@@ -24,6 +25,7 @@
         <li onclick="showSection('mercado')">🌎 Mercado</li>
         <li onclick="showSection('organizacion')">👥 Organización</li>
         <li onclick="showSection('estrategias')">🚀 Estrategias</li>
+        <li onclick="showSection('productos')">🌱 Productos</li>
     </ul>
 </div>
 
@@ -175,6 +177,41 @@
                 <li>90 libras de núcleos</li>
             </ul>
         </div>
+        <!--PLANES DE CONTINGENCIA-->
+        <div class="card">
+            <h2>Planes de Contingencia</h2>
+            <p>
+                La empresa cuenta con protocolos diseñados para mitigar riesgos operativos y garantizar
+                la continuidad del proceso productivo ante eventos adversos.
+            </p>
+        </div>
+        
+        <div class="card">
+            <h3>Olas de Calor Extremo</h3>
+            <ul>
+                <li>Incremento de riego para mantener humedad entre 70% y 80%</li>
+                <li>Uso de coberturas para reducir la exposición directa al sol</li>
+                <li>Monitoreo constante de temperatura en las camas</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Control de Plagas</h3>
+            <ul>
+                <li>Instalación de barreras físicas contra hormigas</li>
+                <li>Uso de métodos naturales para evitar aves</li>
+                <li>Supervisión periódica del área de producción</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Escasez de Materia Orgánica</h3>
+            <ul>
+                <li>Alianzas con mercados locales para asegurar suministro</li>
+                <li>Recolección programada de residuos orgánicos</li>
+                <li>Almacenamiento estratégico de materia prima</li>
+            </ul>
+        </div>
 
     </section>
 
@@ -198,19 +235,34 @@
 
         <div class="card">
             <h1>Estructura Organizacional</h1>
-            <p>31 colaboradores organizados funcionalmente.</p>
+            <p>
+                Verminature cuenta con una estructura organizacional de tipo funcional,
+                diseñada para optimizar la eficiencia mediante la especialización de cada área.
+                La dirección general coordina los distintos departamentos clave de la empresa.
+            </p>
         </div>
-
+    
         <div class="card">
-            <ul>
-                <li>Gerencia General</li>
-                <li>Operaciones</li>
-                <li>Ventas</li>
-                <li>Finanzas</li>
-                <li>Recursos Humanos</li>
-            </ul>
+            <h2>Organigrama General</h2>
+            <p>
+                El organigrama refleja la jerarquía de la empresa, encabezada por el Gerente General,
+                seguido de los departamentos de Operaciones, Ventas, Finanzas y Recursos Humanos.
+            </p>
+    
+            <img src="organigrama_general.png" alt="Organigrama General" class="organigrama">
         </div>
-
+    
+        <div class="card">
+            <h2>Distribución de Departamentos</h2>
+            <p>
+                Cada departamento cumple funciones específicas dentro de la organización:
+                operaciones supervisa la producción, ventas gestiona la comercialización,
+                finanzas controla los recursos y recursos humanos administra el talento.
+            </p>
+    
+            <img src="organigrama_departamentos.png" alt="Departamentos" class="organigrama">
+        </div>
+    
     </section>
 
     <!-- ESTRATEGIAS -->
@@ -229,6 +281,56 @@
     </section>
 
 </div>
+<!-- PLANES DE PRODUCTOS-->
+<section id="productos" class="section">
+
+    <div class="card">
+        <h1>Productos</h1>
+        <p>
+            Verminature ofrece productos orgánicos de alta calidad derivados del proceso de vermicompostaje,
+            diseñados para mejorar la fertilidad del suelo y optimizar el crecimiento de cultivos.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Humus de Lombriz</h2>
+        <p>
+            Fertilizante sólido obtenido mediante la descomposición biológica de materia orgánica.
+            Es rico en nutrientes esenciales y mejora la estructura del suelo.
+        </p>
+        <ul>
+            <li>Producción mensual: 15 toneladas</li>
+            <li>Alta retención de humedad</li>
+            <li>Mejora la microbiología del suelo</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Lixiviado</h2>
+        <p>
+            Fertilizante líquido concentrado generado durante el proceso de vermicompostaje.
+            Ideal para aplicación directa en cultivos.
+        </p>
+        <ul>
+            <li>Producción mensual: 15,000 litros</li>
+            <li>Disponible en versión concentrada y diluida</li>
+            <li>Absorción rápida por las plantas</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Núcleos de Lombriz</h2>
+        <p>
+            Excedente de lombrices utilizado para la reproducción y expansión de sistemas de vermicompostaje.
+        </p>
+        <ul>
+            <li>Producción mensual: 90 libras</li>
+            <li>Alta tasa de reproducción</li>
+            <li>Adaptabilidad a diferentes condiciones</li>
+        </ul>
+    </div>
+
+</section>
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
