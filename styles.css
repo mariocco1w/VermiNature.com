@@ -64,10 +64,6 @@ body {
     background: rgba(255,255,255,0.2);
 }
 
-/* CONTENIDO PRINCIPAL */
-.content {
-    padding: 80px 30px 30px 30px; /* espacio arriba por el botón */
-}
 
 /* SECCIONES */
 .section {
@@ -82,4 +78,19 @@ body {
 /* TITULOS */
 h1 {
     margin-top: 0;
+}
+/* ===== AJUSTE DE CONTENIDO CON SIDEBAR ===== */
+
+.content {
+    padding: 80px 30px 30px 30px;
+    transition: margin-left 0.3s;
+}
+
+.sidebar.active ~ .content {
+    margin-left: 260px;
+}
+
+/* sombra opcional */
+.sidebar {
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
 }
