@@ -118,3 +118,45 @@ ul {
         transform: translateY(0);
     }
 }
+/* CONTENIDO MÁS CENTRADO */
+.content {
+    padding: 90px 60px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* CARDS MÁS BONITAS */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    border-left: 6px solid #2e7d32;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* TITULOS MÁS LIMPIOS */
+h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+/* SEPARACIÓN DE LISTAS */
+ul li {
+    margin-bottom: 6px;
+}
+
+/* CANVAS (GRÁFICAS) */
+canvas {
+    margin-top: 15px;
+    max-height: 300px;
+}
