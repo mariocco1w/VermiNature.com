@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Botón hamburguesa */
+.menu-btn {
+    font-size: 30px;
+    padding: 15px;
+    cursor: pointer;
+    background: #2e7d32;
+    color: white;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #1b5e20;
+    color: white;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.sidebar li:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Contenido */
+.content {
+    padding: 30px;
+}
+
+/* Secciones */
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
