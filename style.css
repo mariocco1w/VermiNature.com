@@ -3,6 +3,13 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background: #eef2f3;
 }
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    margin-bottom: 80px;
+}
 
 .container {
     display: flex;
