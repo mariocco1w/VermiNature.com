@@ -5,11 +5,14 @@ body {
 
 /* Botón hamburguesa */
 .menu-btn {
-    font-size: 30px;
-    padding: 15px;
+    font-size: 25px;
+    padding: 10px 15px;
     cursor: pointer;
     background: #2e7d32;
     color: white;
+    width: fit-content;
+    border-radius: 5px;
+    margin: 10px;
 }
 
 /* Sidebar */
@@ -60,4 +63,11 @@ body {
 
 .section.active {
     display: block;
+}
+.section {
+    display: none;
+    min-height: 80vh;
+}
+.content {
+    padding: 40px;
 }
