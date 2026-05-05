@@ -13,6 +13,11 @@ body {
     width: fit-content;
     border-radius: 5px;
     margin: 10px;
+
+    position: fixed;   
+    top: 10px;
+    left: 10px;
+    z-index: 1000; 
 }
 
 /* Sidebar */
@@ -26,10 +31,16 @@ body {
     color: white;
     padding: 20px;
     transition: 0.3s;
+    z-index: 999;
 }
 
-.sidebar.active {
-    left: 0;
+.content {
+    padding: 40px;
+    transition: margin-left 0.3s;
+}
+
+.sidebar.active ~ .content {
+    margin-left: 250px;
 }
 
 .sidebar h2 {
