@@ -15,20 +15,28 @@ body {
     border-radius: 8px;
     cursor: pointer;
     z-index: 1001;
+    transition: 0.2s;
 }
 
-/* SIDEBAR */
+.menu-btn:hover {
+    background: #1b5e20;
+}
+
+/* ===== SIDEBAR PRO ===== */
 .sidebar {
     position: fixed;
     top: 0;
     left: -260px;
     width: 260px;
     height: 100%;
-    background: #1b5e20;
+    background: linear-gradient(180deg, #1b5e20, #2e7d32);
     color: white;
-    padding: 20px;
-    transition: 0.3s;
+    padding: 25px 20px;
     z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+
     transition: left 0.3s ease;
 }
 
@@ -36,12 +44,38 @@ body {
     left: 0;
 }
 
-.sidebar li {
-    padding: 10px;
-    cursor: pointer;
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
 }
 
-/* OVERLAY */
+/* menú */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    transition: all 0.25s ease;
+}
+
+/* hover elegante */
+.sidebar li:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateX(5px);
+}
+
+/* ===== OVERLAY ===== */
 .overlay {
     position: fixed;
     width: 100%;
@@ -57,17 +91,17 @@ body {
     display: block;
 }
 
-/* CONTENIDO */
+/* ===== CONTENIDO ===== */
 .content {
     padding: 90px 60px;
     max-width: 1100px;
     margin: auto;
     transition: margin-left 0.3s;
     position: relative;
-    
+    overflow: hidden;
 }
 
-/* SECCIONES */
+/* ===== SECCIONES ===== */
 .section {
     opacity: 0;
     transform: translateY(10px);
@@ -84,15 +118,26 @@ body {
     position: relative;
 }
 
-/* CARDS */
+/* ===== CARDS PRO ===== */
 .card {
     background: white;
     padding: 25px;
     border-radius: 14px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
     margin-bottom: 25px;
-    border-left: 6px solid #2e7d32;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-left: 5px solid #2e7d32;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
+/* hover */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* ===== ANIMACIÓN EXTRA (opcional suave) ===== */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -104,7 +149,7 @@ body {
     }
 }
 
-/* GRÁFICAS */
+/* ===== GRÁFICAS ===== */
 canvas {
     margin-top: 15px;
 }
@@ -117,6 +162,7 @@ canvas {
         margin-left: 0 !important;
     }
 
+    /* sidebar tipo app */
     .sidebar {
         width: 100%;
         left: -100%;
@@ -124,6 +170,12 @@ canvas {
 
     .sidebar.active {
         left: 0;
+    }
+
+    /* items más grandes */
+    .sidebar li {
+        padding: 15px;
+        font-size: 18px;
     }
 
     h1 {
@@ -134,10 +186,24 @@ canvas {
         font-size: 18px;
     }
 
+    /* cards más compactas */
     .card {
         padding: 18px;
+        border-left: 4px solid #2e7d32;
     }
 
+    /* animación tipo app */
+    .section {
+        transform: translateX(40px);
+        opacity: 0;
+    }
+
+    .section.active {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    /* gráficas */
     canvas {
         width: 100% !important;
         height: auto !important;
