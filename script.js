@@ -1,7 +1,15 @@
 function toggleMenu() {
-    document.getElementById("sidebar").classList.toggle("active");
-}
+    const sidebar = document.getElementById("sidebar");
+    const content = document.querySelector(".content");
 
+    sidebar.classList.toggle("active");
+
+    if (sidebar.classList.contains("active")) {
+        content.style.marginLeft = "260px";
+    } else {
+        content.style.marginLeft = "0px";
+    }
+}
 function showSection(id) {
     const sections = document.querySelectorAll(".section");
 

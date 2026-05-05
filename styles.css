@@ -86,9 +86,6 @@ h1 {
     transition: margin-left 0.3s;
 }
 
-.sidebar.active ~ .content {
-    margin-left: 260px;
-}
 
 /* sombra opcional */
 .sidebar {
