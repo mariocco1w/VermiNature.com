@@ -155,55 +155,58 @@ canvas {
 }
 
 /* ===== MOBILE ===== */
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
 
     .content {
-        padding: 80px 20px;
+        padding: 90px 18px 30px 18px;
         margin-left: 0;
+        width: calc(100% - 36px);
+        overflow-x: hidden;
     }
-
-    /* 👇 ESTE ES EL FIX CLAVE */
-    body.sidebar-open .content {
-        transform: translateX(250px);
-    }
-
-
 
     /* sidebar tipo app */
     .sidebar {
-        width: 100%;
-        left: -100%;
+        width: 260px;
+        left: -260px;
     }
 
     .sidebar.active {
         left: 0;
     }
 
-    /* items más grandes */
+    /* overlay oscuro */
+    .overlay.active {
+        display: block;
+    }
+
+    /* items */
     .sidebar li {
         padding: 15px;
         font-size: 18px;
     }
 
     h1 {
-        font-size: 24px;
+        font-size: 32px;
     }
 
     h2 {
-        font-size: 18px;
+        font-size: 22px;
     }
 
-    /* cards más compactas */
     .card {
-        padding: 18px;
+        padding: 20px;
         border-left: 4px solid #2e7d32;
-    }
-    .card h3 {
-        color: #1b5e20;
-        margin-bottom: 10px;
+        border-radius: 18px;
     }
 
-    /* animación tipo app */
+    .card p,
+    .card li {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    /* animación */
     .section {
         transform: translateX(40px);
         opacity: 0;
@@ -214,11 +217,21 @@ canvas {
         opacity: 1;
     }
 
+    /* imágenes */
+    .producto-img,
+    .organigrama {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
     /* gráficas */
     canvas {
         width: 100% !important;
         height: auto !important;
     }
+
 }
 .producto-img {
     width: 100%;
