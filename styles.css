@@ -159,8 +159,15 @@ canvas {
 
     .content {
         padding: 80px 20px;
-        margin-left: 0 !important;
+        margin-left: 0;
     }
+
+    /* 👇 ESTE ES EL FIX CLAVE */
+    body.sidebar-open .content {
+        transform: translateX(250px);
+    }
+
+
 
     /* sidebar tipo app */
     .sidebar {
