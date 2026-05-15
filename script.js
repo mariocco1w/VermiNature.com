@@ -129,27 +129,15 @@ function closeInvoice() {
 }
 
 function downloadPDF() {
-    // Seleccionar el contenedor de la factura
+    // Seleccionar el contenedor principal de la factura
     const element = document.querySelector(".invoice-container");
     
-    // Crear un clon para la captura (evita problemas con el modal fixed)
-    const clone = element.cloneNode(true);
+    // Seleccionar la sección de botones para ocultarlos en el PDF
+    const footer = document.querySelector(".invoice-footer");
+    const buttonDiv = footer.querySelector("div");
     
-    // Estilos para el clon (asegura fondo blanco y visibilidad total)
-    clone.style.position = "fixed";
-    clone.style.left = "-9999px";
-    clone.style.top = "0";
-    clone.style.width = "600px"; // Ancho fijo para consistencia
-    clone.style.background = "white";
-    clone.style.display = "block";
-    document.body.appendChild(clone);
-
-    // Remover los botones del clon para que no salgan en el PDF
-    const footer = clone.querySelector(".invoice-footer");
-    const buttonSection = footer.querySelector("div");
-    if (buttonSection) {
-        buttonSection.style.display = "none";
-    }
+    // Ocultar botones momentáneamente
+    if (buttonDiv) buttonDiv.style.visibility = "hidden";
 
     const opt = {
         margin:       [0.5, 0.5],
@@ -157,16 +145,19 @@ function downloadPDF() {
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { 
             scale: 2, 
-            useCORS: true, 
-            backgroundColor: "#ffffff",
-            logging: false
+            useCORS: true,
+            scrollY: -window.scrollY, // Fix para mobile si hay scroll
+            backgroundColor: '#ffffff'
         },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    // Generar PDF desde el clon y luego eliminarlo
-    html2pdf().set(opt).from(clone).save().then(() => {
-        document.body.removeChild(clone);
+    // Ejecutar la generación y mostrar botones al finalizar
+    html2pdf().set(opt).from(element).save().then(() => {
+        if (buttonDiv) buttonDiv.style.visibility = "visible";
+    }).catch(err => {
+        console.error("Error al generar PDF:", err);
+        if (buttonDiv) buttonDiv.style.visibility = "visible";
     });
 }
 
