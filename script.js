@@ -1,85 +1,149 @@
+let cart = [];
+
 function toggleMenu() {
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
-
-    sidebar.classList.toggle("active");
-    overlay.classList.toggle("active");
-
-    updateContentLayout();
+    document.getElementById("sidebar").classList.toggle("active");
+    document.getElementById("overlay").classList.toggle("active");
 }
 
-function updateContentLayout() {
-    const sidebar = document.getElementById("sidebar");
-    const content = document.querySelector(".content");
+function toggleCart() {
+    document.getElementById("cart-sidebar").classList.toggle("active");
+    document.getElementById("overlay").classList.toggle("active");
+}
 
-    // SOLO mueve contenido en escritorio (ancho > 768px)
-    if (window.innerWidth > 768) {
-        content.style.marginLeft = sidebar.classList.contains("active") ? "260px" : "0px";
-    } else {
-        content.style.marginLeft = "0px";
-    }
+function closeAll() {
+    document.getElementById("sidebar").classList.remove("active");
+    document.getElementById("cart-sidebar").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
 }
 
 function showSection(id) {
-    document.querySelectorAll(".section").forEach(sec => {
-        sec.classList.remove("active");
-    });
-
+    document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
     document.getElementById(id).classList.add("active");
-
-    // cerrar menú automáticamente
-    document.getElementById("sidebar").classList.remove("active");
-    document.getElementById("overlay").classList.remove("active");
-
-    // Asegurar que el layout se actualice al cerrar el menú
-    updateContentLayout();
-    
-    // Hacer scroll al inicio al cambiar de sección
-    window.scrollTo(0, 0);
+    closeAll();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Escuchar cambios de tamaño de ventana para ajustar el layout
-window.addEventListener('resize', updateContentLayout);
+/* CARRITO LOGIC */
+function addToCart(name, price) {
+    const item = cart.find(i => i.name === name);
+    if (item) {
+        item.qty++;
+    } else {
+        cart.push({ name, price, qty: 1 });
+    }
+    updateCartUI();
+    toggleCart(); // Mostrar carrito al añadir
+}
 
-/* ===== GRÁFICAS ===== */
+function updateCartUI() {
+    const container = document.getElementById("cart-items");
+    const countLabel = document.getElementById("cart-count");
+    const totalLabel = document.getElementById("cart-total");
+    
+    container.innerHTML = "";
+    let total = 0;
+    let count = 0;
 
-window.addEventListener('DOMContentLoaded', () => {
-    const inversionCtx = document.getElementById("inversionChart");
-    if (inversionCtx) {
-        new Chart(inversionCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Infraestructura', 'Equipo', 'Capital'],
-                datasets: [{
-                    data: [4927000, 122000, 521800]
-                }]
-            }
+    if (cart.length === 0) {
+        container.innerHTML = '<p class="empty-msg">Tu carrito está vacío</p>';
+    } else {
+        cart.forEach((item, index) => {
+            total += item.price * item.qty;
+            count += item.qty;
+            container.innerHTML += `
+                <div class="cart-item">
+                    <div>
+                        <strong>${item.name}</strong><br>
+                        <small>Q${item.price.toFixed(2)} x ${item.qty}</small>
+                    </div>
+                    <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#e53935; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                </div>
+            `;
         });
     }
 
-    const costosCtx = document.getElementById("costosChart");
-    if (costosCtx) {
-        new Chart(costosCtx, {
+    countLabel.innerText = count;
+    totalLabel.innerText = `Q${total.toFixed(2)}`;
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+}
+
+function checkout() {
+    if (cart.length === 0) return alert("El carrito está vacío");
+    alert("¡Gracias por tu interés! Próximamente habilitaremos pagos en línea.");
+    cart = [];
+    updateCartUI();
+    closeAll();
+}
+
+/* ===== GRÁFICAS PROFESIONALES ===== */
+const chartOptions = {
+    responsive: true,
+    animation: {
+        duration: 2000,
+        easing: 'easeOutQuart'
+    },
+    plugins: {
+        legend: { position: 'bottom' }
+    }
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+    // Inversión
+    const invCtx = document.getElementById("inversionChart");
+    if (invCtx) {
+        new Chart(invCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Infraestructura', 'Equipo', 'Capital'],
+                datasets: [{
+                    data: [4927000, 122000, 521800],
+                    backgroundColor: ['#2e7d32', '#8bc34a', '#aed581'],
+                    borderWidth: 0
+                }]
+            },
+            options: chartOptions
+        });
+    }
+
+    // Costos
+    const costCtx = document.getElementById("costosChart");
+    if (costCtx) {
+        new Chart(costCtx, {
             type: 'bar',
             data: {
                 labels: ['Fijos', 'Variables', 'Ventas', 'Utilidad'],
                 datasets: [{
-                    data: [221900, 39000, 486850, 225950]
+                    label: 'Valores en Q',
+                    data: [221900, 39000, 486850, 225950],
+                    backgroundColor: '#2e7d32',
+                    borderRadius: 8
                 }]
-            }
+            },
+            options: chartOptions
         });
     }
 
-    const utilidadCtx = document.getElementById("utilidadChart");
-    if (utilidadCtx) {
-        new Chart(utilidadCtx, {
+    // Proyección
+    const utilCtx = document.getElementById("utilidadChart");
+    if (utilCtx) {
+        new Chart(utilCtx, {
             type: 'line',
             data: {
-                labels: ['Mes1','Mes2','Mes3','Mes4'],
+                labels: ['Mes 1', 'Mes 2', 'Mes 3', 'Mes 4'],
                 datasets: [{
-                    data: [225950,451900,677850,903800]
+                    label: 'Proyección Utilidad',
+                    data: [225950, 451900, 677850, 903800],
+                    borderColor: '#2e7d32',
+                    backgroundColor: 'rgba(46, 125, 50, 0.1)',
+                    fill: true,
+                    tension: 0.4
                 }]
-            }
+            },
+            options: chartOptions
         });
     }
 });

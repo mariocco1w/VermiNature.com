@@ -2,36 +2,63 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Verminature</title>
+    <title>Verminature | Soluciones Agrícolas Sostenibles</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    
 </head>
 <body>
 
-<!-- BOTÓN -->
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
+<!-- NAVEGACIÓN SUPERIOR (NUEVA) -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <div class="logo">Verminature</div>
+        <div class="cart-icon" onclick="toggleCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </div>
+</nav>
+
+<!-- CARRITO DE COMPRAS (SLIDE-OUT) -->
+<div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+        <h3>Tu Carrito</h3>
+        <span class="close-cart" onclick="toggleCart()">&times;</span>
+    </div>
+    <div id="cart-items" class="cart-items-container">
+        <!-- Items dinámicos -->
+        <p class="empty-msg">Tu carrito está vacío</p>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">Total: <span id="cart-total">Q0.00</span></div>
+        <button class="btn-checkout" onclick="checkout()">Finalizar Compra</button>
+    </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-    <div class="close-btn" onclick="toggleMenu()">×</div>
-    <h2>Verminature</h2>
+    <div class="close-btn" onclick="toggleMenu()">&times;</div>
+    <div class="sidebar-header">
+        <i class="fas fa-leaf"></i>
+        <h2>Verminature</h2>
+    </div>
     <ul>
-        <li onclick="showSection('inicio')">🏠 Inicio</li>
-        <li onclick="showSection('empresa')">🏢 Empresa</li>
-        <li onclick="showSection('finanzas')">📊 Finanzas</li>
-        <li onclick="showSection('operaciones')">⚙️ Operaciones</li>
-        <li onclick="showSection('mercado')">🌎 Mercado</li>
-        <li onclick="showSection('productos')">🌱 Productos</li>
-        <li onclick="showSection('organizacion')">👥 Organización</li>
-        <li onclick="showSection('estrategias')">🚀 Estrategias</li>
-        <li onclick="showSection('trabajo')">💼  Trabaja con Nosotors</li>
-        
+        <li onclick="showSection('inicio')"><i class="fas fa-home"></i> Inicio</li>
+        <li onclick="showSection('empresa')"><i class="fas fa-building"></i> Empresa</li>
+        <li onclick="showSection('productos')"><i class="fas fa-seedling"></i> Tienda Online</li>
+        <li onclick="showSection('finanzas')"><i class="fas fa-chart-line"></i> Finanzas</li>
+        <li onclick="showSection('operaciones')"><i class="fas fa-cogs"></i> Operaciones</li>
+        <li onclick="showSection('mercado')"><i class="fas fa-globe"></i> Mercado</li>
+        <li onclick="showSection('organizacion')"><i class="fas fa-users"></i> Organización</li>
+        <li onclick="showSection('estrategias')"><i class="fas fa-rocket"></i> Estrategias</li>
+        <li onclick="showSection('trabajo')"><i class="fas fa-briefcase"></i> Empleos</li>
     </ul>
 </div>
-
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 <!-- CONTENIDO -->
 <div class="content">
 
@@ -309,22 +336,34 @@
         <p>Verminature ofrece productos orgánicos de alta calidad derivados del proceso de vermicompostaje.</p>
     </div>
 
-    <div class="card">
-        <h2>Humus de Lombriz</h2>
-        <ul>
-            <li>15 toneladas mensuales</li>
-            <li>Alta retención de humedad</li>
-            <li>Mejora microbiológica</li>
-        </ul>
+    <div class="card product-card">
+        <div class="product-info">
+            <h2>Humus de Lombriz</h2>
+            <p class="price">Q45.00 <small>/ sacos</small></p>
+            <ul>
+                <li>15 toneladas mensuales</li>
+                <li>Alta retención de humedad</li>
+                <li>Mejora microbiológica</li>
+            </ul>
+            <button class="btn-buy" onclick="addToCart('Humus de Lombriz', 45)">
+                <i class="fas fa-plus"></i> Añadir al Carrito
+            </button>
+        </div>
     </div>
 
-    <div class="card">
-        <h2>Lixiviado</h2>
-        <ul>
-            <li>15,000 litros mensuales</li>
-            <li>Concentrado y diluido</li>
-            <li>Absorción rápida</li>
-        </ul>
+    <div class="card product-card">
+        <div class="product-info">
+            <h2>Lixiviado</h2>
+            <p class="price">Q30.00 <small>/ litro</small></p>
+            <ul>
+                <li>15,000 litros mensuales</li>
+                <li>Concentrado y diluido</li>
+                <li>Absorción rápida</li>
+            </ul>
+            <button class="btn-buy" onclick="addToCart('Lixiviado', 30)">
+                <i class="fas fa-plus"></i> Añadir al Carrito
+            </button>
+        </div>
     </div>
 
     <div class="card">
