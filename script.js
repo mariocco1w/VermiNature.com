@@ -129,31 +129,29 @@ function closeInvoice() {
 }
 
 function downloadPDF() {
-    // 1. Obtener el elemento original
     const original = document.querySelector(".invoice-container");
     const invNumber = document.getElementById("inv-number").innerText;
-
-    // 2. Crear un clon profundo
+    
+    // Clonar
     const clone = original.cloneNode(true);
 
-    // Aplicar estilos computados del original al clon
+    // 1. Asegurar que el clon tenga el mismo contenido dinámico que el original
+    const originalItems = document.getElementById("inv-items").innerHTML;
+    clone.querySelector("#inv-items").innerHTML = originalItems;
+
+    // 2. Aplicar estilos computados
     const computedStyle = window.getComputedStyle(original);
     for (let i = 0; i < computedStyle.length; i++) {
         const prop = computedStyle[i];
         clone.style[prop] = computedStyle.getPropertyValue(prop);
     }
 
-    // 3. Preparar el clon para la captura (estilos forzados)
+    // 3. Forzar estilos de renderizado
     clone.style.position = "absolute";
-    clone.style.top = "0";
-    clone.style.left = "-9999px"; // Fuera de pantalla pero visible para el DOM
+    clone.style.left = "-9999px";
     clone.style.width = "700px";
-    clone.style.height = "auto";
     clone.style.background = "white";
     clone.style.display = "block";
-    clone.style.visibility = "visible";
-    clone.style.opacity = "1";
-    clone.style.margin = "0";
     clone.style.padding = "40px";
     
     // Ocultar botones en el clon
@@ -162,31 +160,24 @@ function downloadPDF() {
 
     document.body.appendChild(clone);
 
-    // 4. Configuración conservadora para html2pdf
     const opt = {
-        margin:       [0.5, 0.5],
-        filename:     `Factura_Verminature_${invNumber}.pdf`,
-        image:        { type: 'jpeg', quality: 1 },
-        html2canvas:  { 
+        margin: [0.5, 0.5],
+        filename: `Factura_Verminature_${invNumber}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
             scale: 2, 
             useCORS: true,
-            backgroundColor: "#ffffff",
-            width: 700,
-            scrollY: 0,
-            windowWidth: 1200
+            logging: false 
         },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    // 5. Pequeño delay para asegurar renderizado del clon y captura
+    // Aumentar delay a 300ms para asegurar renderizado completo
     setTimeout(() => {
         html2pdf().set(opt).from(clone).save().then(() => {
             document.body.removeChild(clone);
-        }).catch(err => {
-            console.error("Error PDF:", err);
-            document.body.removeChild(clone);
         });
-    }, 100);
+    }, 300);
 }
 
 /* ===== GRÁFICAS PROFESIONALES ===== */
