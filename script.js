@@ -129,36 +129,57 @@ function closeInvoice() {
 }
 
 function downloadPDF() {
-    const element = document.querySelector(".invoice-container");
+    // 1. Obtener el elemento original
+    const original = document.querySelector(".invoice-container");
     const invNumber = document.getElementById("inv-number").innerText;
+
+    // 2. Crear un clon profundo
+    const clone = original.cloneNode(true);
+
+    // 3. Preparar el clon para la captura (estilos forzados)
+    clone.style.position = "absolute";
+    clone.style.top = "0";
+    clone.style.left = "-9999px"; // Fuera de pantalla pero visible para el DOM
+    clone.style.width = "700px";
+    clone.style.height = "auto";
+    clone.style.background = "white";
+    clone.style.display = "block";
+    clone.style.visibility = "visible";
+    clone.style.opacity = "1";
+    clone.style.margin = "0";
+    clone.style.padding = "40px";
     
-    // Configuración para captura de alta fidelidad y paginación automática
+    // Ocultar botones en el clon
+    const cloneFooter = clone.querySelector(".invoice-footer div");
+    if (cloneFooter) cloneFooter.style.display = "none";
+
+    document.body.appendChild(clone);
+
+    // 4. Configuración conservadora para html2pdf
     const opt = {
-        margin:       0.5,
+        margin:       [0.5, 0.5],
         filename:     `Factura_Verminature_${invNumber}.pdf`,
         image:        { type: 'jpeg', quality: 1 },
         html2canvas:  { 
             scale: 2, 
             useCORS: true,
-            letterRendering: true,
-            backgroundColor: "#ffffff"
+            backgroundColor: "#ffffff",
+            width: 700,
+            scrollY: 0,
+            windowWidth: 1200
         },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] } // Maneja listas largas
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    // Ocultar botones temporalmente usando una clase o estilo directo
-    const footer = element.querySelector(".invoice-footer");
-    const buttons = footer.querySelector("div");
-    if (buttons) buttons.style.visibility = "hidden";
-
-    // Generar PDF directamente del elemento visible
-    html2pdf().set(opt).from(element).save().then(() => {
-        if (buttons) buttons.style.visibility = "visible";
-    }).catch(err => {
-        console.error("Error PDF:", err);
-        if (buttons) buttons.style.visibility = "visible";
-    });
+    // 5. Pequeño delay para asegurar renderizado del clon y captura
+    setTimeout(() => {
+        html2pdf().set(opt).from(clone).save().then(() => {
+            document.body.removeChild(clone);
+        }).catch(err => {
+            console.error("Error PDF:", err);
+            document.body.removeChild(clone);
+        });
+    }, 100);
 }
 
 /* ===== GRÁFICAS PROFESIONALES ===== */
