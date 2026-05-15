@@ -130,43 +130,34 @@ function closeInvoice() {
 
 function downloadPDF() {
     const element = document.querySelector(".invoice-container");
-    const originalParent = element.parentNode;
     const invNumber = document.getElementById("inv-number").innerText;
-
-    // Ocultar botones para el PDF
-    const footer = element.querySelector(".invoice-footer");
-    const buttons = footer.querySelector("div");
-    if (buttons) buttons.style.display = "none";
-
-    // Técnica de "Espejo Perfecto": Mover al body para evitar interferencias de CSS del modal
-    document.body.appendChild(element);
-    element.style.position = "relative";
-    element.style.zIndex = "9999";
-    element.style.background = "white";
-
+    
+    // Configuración para captura de alta fidelidad y paginación automática
     const opt = {
-        margin:       [0.5, 0.5],
+        margin:       0.5,
         filename:     `Factura_Verminature_${invNumber}.pdf`,
         image:        { type: 'jpeg', quality: 1 },
         html2canvas:  { 
             scale: 2, 
             useCORS: true,
-            backgroundColor: "#ffffff",
-            logging: false
+            letterRendering: true,
+            backgroundColor: "#ffffff"
         },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] } // Maneja listas largas
     };
 
-    // Generar PDF y restaurar el elemento a su lugar original
+    // Ocultar botones temporalmente usando una clase o estilo directo
+    const footer = element.querySelector(".invoice-footer");
+    const buttons = footer.querySelector("div");
+    if (buttons) buttons.style.visibility = "hidden";
+
+    // Generar PDF directamente del elemento visible
     html2pdf().set(opt).from(element).save().then(() => {
-        if (buttons) buttons.style.display = "flex";
-        originalParent.appendChild(element); // Regresar al modal
-        element.style.position = "";
-        element.style.zIndex = "";
+        if (buttons) buttons.style.visibility = "visible";
     }).catch(err => {
         console.error("Error PDF:", err);
-        originalParent.appendChild(element);
-        if (buttons) buttons.style.display = "flex";
+        if (buttons) buttons.style.visibility = "visible";
     });
 }
 
