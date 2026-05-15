@@ -136,6 +136,13 @@ function downloadPDF() {
     // 2. Crear un clon profundo
     const clone = original.cloneNode(true);
 
+    // Aplicar estilos computados del original al clon
+    const computedStyle = window.getComputedStyle(original);
+    for (let i = 0; i < computedStyle.length; i++) {
+        const prop = computedStyle[i];
+        clone.style[prop] = computedStyle.getPropertyValue(prop);
+    }
+
     // 3. Preparar el clon para la captura (estilos forzados)
     clone.style.position = "absolute";
     clone.style.top = "0";
