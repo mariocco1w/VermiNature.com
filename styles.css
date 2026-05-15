@@ -405,16 +405,20 @@ canvas {
     color: var(--text-light);
 }
 
-.btn-print {
-    background: var(--primary);
+.btn-print, .btn-download {
     color: white;
     border: none;
-    padding: 12px 30px;
+    padding: 12px 25px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    margin-top: 20px;
+    transition: var(--transition);
 }
+
+.btn-print { background: var(--primary); }
+.btn-download { background: #d32f2f; }
+
+.btn-print:hover, .btn-download:hover { opacity: 0.9; transform: translateY(-2px); }
 
 @media (max-width: 600px) {
     .invoice-container { padding: 20px; }

@@ -122,10 +122,30 @@ function checkout() {
 
 function closeInvoice() {
     document.getElementById("invoice-modal").style.display = "none";
-    alert("¡Pedido simulado con éxito! Se ha enviado una copia a su correo (simulación).");
+    alert("Factura enviada correctamente");
     cart = [];
     updateCartUI();
     closeAll();
+}
+
+function downloadPDF() {
+    const element = document.querySelector(".invoice-container");
+    // Ocultar botones temporalmente para el PDF
+    const footer = document.querySelector(".invoice-footer");
+    const buttons = footer.querySelector("div");
+    buttons.style.display = "none";
+
+    const opt = {
+        margin:       0.5,
+        filename:     `Factura_Verminature_${document.getElementById("inv-number").innerText}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+        buttons.style.display = "flex"; // Volver a mostrar botones
+    });
 }
 
 /* ===== GRÁFICAS PROFESIONALES ===== */

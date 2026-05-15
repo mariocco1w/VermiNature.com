@@ -489,13 +489,19 @@
         <div class="invoice-footer">
             <p>¡Gracias por su simulación de compra!</p>
             <p>Este documento es una representación virtual con fines ilustrativos.</p>
-            <button class="btn-print" onclick="closeInvoice()">
-                <i class="fas fa-check"></i> Finalizar
-            </button>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                <button class="btn-download" onclick="downloadPDF()">
+                    <i class="fas fa-file-pdf"></i> Descargar PDF
+                </button>
+                <button class="btn-print" onclick="closeInvoice()">
+                    <i class="fas fa-check"></i> Finalizar
+                </button>
+            </div>
         </div>
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="script.js"></script>
 </body>
