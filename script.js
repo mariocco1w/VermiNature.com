@@ -129,55 +129,25 @@ function closeInvoice() {
 }
 
 function downloadPDF() {
-    const original = document.querySelector(".invoice-container");
+    const element = document.querySelector(".invoice-container");
     const invNumber = document.getElementById("inv-number").innerText;
-    
-    // Clonar
-    const clone = original.cloneNode(true);
 
-    // 1. Asegurar que el clon tenga el mismo contenido dinámico que el original
-    const originalItems = document.getElementById("inv-items").innerHTML;
-    clone.querySelector("#inv-items").innerHTML = originalItems;
-
-    // 2. Aplicar estilos computados
-    const computedStyle = window.getComputedStyle(original);
-    for (let i = 0; i < computedStyle.length; i++) {
-        const prop = computedStyle[i];
-        clone.style[prop] = computedStyle.getPropertyValue(prop);
-    }
-
-    // 3. Forzar estilos de renderizado
-    clone.style.position = "absolute";
-    clone.style.left = "-9999px";
-    clone.style.width = "700px";
-    clone.style.background = "white";
-    clone.style.display = "block";
-    clone.style.padding = "40px";
-    
-    // Ocultar botones en el clon
-    const cloneFooter = clone.querySelector(".invoice-footer div");
-    if (cloneFooter) cloneFooter.style.display = "none";
-
-    document.body.appendChild(clone);
-
+    // Configuramos html2pdf para capturar directamente
     const opt = {
         margin: [0.5, 0.5],
         filename: `Factura_Verminature_${invNumber}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
+        image: { type: 'jpeg', quality: 1 },
         html2canvas: { 
             scale: 2, 
             useCORS: true,
-            logging: false 
+            logging: true, // Activado para depurar errores en la consola
+            letterRendering: true
         },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    // Aumentar delay a 300ms para asegurar renderizado completo
-    setTimeout(() => {
-        html2pdf().set(opt).from(clone).save().then(() => {
-            document.body.removeChild(clone);
-        });
-    }, 300);
+    // Capturamos el elemento original tal cual
+    html2pdf().set(opt).from(element).save();
 }
 
 /* ===== GRÁFICAS PROFESIONALES ===== */
