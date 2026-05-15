@@ -223,11 +223,30 @@ body {
     box-shadow: var(--shadow);
     border: 1px solid rgba(0,0,0,0.03);
     transition: var(--transition);
+    overflow: hidden; /* Evita que el contenido se salga */
+    position: relative;
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+}
+
+.organigrama, .producto-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 500px; /* Limita el crecimiento vertical excesivo */
+    display: block;
+    margin: 20px auto;
+    border-radius: 12px;
+    object-fit: contain; /* Asegura que la imagen quepa sin cortarse */
+    transition: var(--transition);
+    background: #fdfdfd;
+}
+
+.organigrama:hover {
+    transform: scale(1.01);
 }
 
 h1 {
