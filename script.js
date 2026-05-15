@@ -130,22 +130,23 @@ function closeInvoice() {
 
 function downloadPDF() {
     const element = document.querySelector(".invoice-container");
-    // Ocultar botones temporalmente para el PDF
-    const footer = document.querySelector(".invoice-footer");
-    const buttons = footer.querySelector("div");
-    buttons.style.display = "none";
-
+    
+    // Opciones optimizadas para evitar el documento vacío
     const opt = {
-        margin:       0.5,
+        margin:       [0.5, 0.5],
         filename:     `Factura_Verminature_${document.getElementById("inv-number").innerText}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
+        html2canvas:  { 
+            scale: 3, 
+            useCORS: true, 
+            letterRendering: true,
+            logging: false
+        },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    html2pdf().set(opt).from(element).save().then(() => {
-        buttons.style.display = "flex"; // Volver a mostrar botones
-    });
+    // Usar la API de promesas de html2pdf para asegurar el renderizado
+    html2pdf().set(opt).from(element).toPdf().get('pdf').save();
 }
 
 /* ===== GRÁFICAS PROFESIONALES ===== */
