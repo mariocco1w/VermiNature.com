@@ -129,24 +129,45 @@ function closeInvoice() {
 }
 
 function downloadPDF() {
+    // Seleccionar el contenedor de la factura
     const element = document.querySelector(".invoice-container");
     
-    // Opciones optimizadas para evitar el documento vacío
+    // Crear un clon para la captura (evita problemas con el modal fixed)
+    const clone = element.cloneNode(true);
+    
+    // Estilos para el clon (asegura fondo blanco y visibilidad total)
+    clone.style.position = "fixed";
+    clone.style.left = "-9999px";
+    clone.style.top = "0";
+    clone.style.width = "600px"; // Ancho fijo para consistencia
+    clone.style.background = "white";
+    clone.style.display = "block";
+    document.body.appendChild(clone);
+
+    // Remover los botones del clon para que no salgan en el PDF
+    const footer = clone.querySelector(".invoice-footer");
+    const buttonSection = footer.querySelector("div");
+    if (buttonSection) {
+        buttonSection.style.display = "none";
+    }
+
     const opt = {
         margin:       [0.5, 0.5],
         filename:     `Factura_Verminature_${document.getElementById("inv-number").innerText}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { 
-            scale: 3, 
+            scale: 2, 
             useCORS: true, 
-            letterRendering: true,
+            backgroundColor: "#ffffff",
             logging: false
         },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    // Usar la API de promesas de html2pdf para asegurar el renderizado
-    html2pdf().set(opt).from(element).toPdf().get('pdf').save();
+    // Generar PDF desde el clon y luego eliminarlo
+    html2pdf().set(opt).from(clone).save().then(() => {
+        document.body.removeChild(clone);
+    });
 }
 
 /* ===== GRÁFICAS PROFESIONALES ===== */
