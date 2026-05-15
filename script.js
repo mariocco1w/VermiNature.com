@@ -129,35 +129,44 @@ function closeInvoice() {
 }
 
 function downloadPDF() {
-    // Seleccionar el contenedor principal de la factura
     const element = document.querySelector(".invoice-container");
-    
-    // Seleccionar la sección de botones para ocultarlos en el PDF
-    const footer = document.querySelector(".invoice-footer");
-    const buttonDiv = footer.querySelector("div");
-    
-    // Ocultar botones momentáneamente
-    if (buttonDiv) buttonDiv.style.visibility = "hidden";
+    const originalParent = element.parentNode;
+    const invNumber = document.getElementById("inv-number").innerText;
+
+    // Ocultar botones para el PDF
+    const footer = element.querySelector(".invoice-footer");
+    const buttons = footer.querySelector("div");
+    if (buttons) buttons.style.display = "none";
+
+    // Técnica de "Espejo Perfecto": Mover al body para evitar interferencias de CSS del modal
+    document.body.appendChild(element);
+    element.style.position = "relative";
+    element.style.zIndex = "9999";
+    element.style.background = "white";
 
     const opt = {
         margin:       [0.5, 0.5],
-        filename:     `Factura_Verminature_${document.getElementById("inv-number").innerText}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
+        filename:     `Factura_Verminature_${invNumber}.pdf`,
+        image:        { type: 'jpeg', quality: 1 },
         html2canvas:  { 
             scale: 2, 
             useCORS: true,
-            scrollY: -window.scrollY, // Fix para mobile si hay scroll
-            backgroundColor: '#ffffff'
+            backgroundColor: "#ffffff",
+            logging: false
         },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    // Ejecutar la generación y mostrar botones al finalizar
+    // Generar PDF y restaurar el elemento a su lugar original
     html2pdf().set(opt).from(element).save().then(() => {
-        if (buttonDiv) buttonDiv.style.visibility = "visible";
+        if (buttons) buttons.style.display = "flex";
+        originalParent.appendChild(element); // Regresar al modal
+        element.style.position = "";
+        element.style.zIndex = "";
     }).catch(err => {
-        console.error("Error al generar PDF:", err);
-        if (buttonDiv) buttonDiv.style.visibility = "visible";
+        console.error("Error PDF:", err);
+        originalParent.appendChild(element);
+        if (buttons) buttons.style.display = "flex";
     });
 }
 
