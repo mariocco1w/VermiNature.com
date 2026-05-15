@@ -89,7 +89,40 @@ function removeFromCart(index) {
 
 function checkout() {
     if (cart.length === 0) return alert("El carrito está vacío");
-    alert("¡Gracias por tu interés! Próximamente habilitaremos pagos en línea.");
+    
+    // Generar datos de factura
+    const invNumber = "#" + Math.floor(Math.random() * 9000 + 1000);
+    const invDate = new Date().toLocaleDateString();
+    
+    document.getElementById("inv-number").innerText = invNumber;
+    document.getElementById("inv-date").innerText = invDate;
+    
+    const itemsContainer = document.getElementById("inv-items");
+    itemsContainer.innerHTML = "";
+    let total = 0;
+
+    cart.forEach(item => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        itemsContainer.innerHTML += `
+            <tr>
+                <td>${item.name}</td>
+                <td style="text-align: center;">${item.qty}</td>
+                <td style="text-align: right;">Q${item.price.toFixed(2)}</td>
+                <td style="text-align: right;">Q${subtotal.toFixed(2)}</td>
+            </tr>
+        `;
+    });
+
+    document.getElementById("inv-total").innerText = `Q${total.toFixed(2)}`;
+    
+    // Mostrar factura
+    document.getElementById("invoice-modal").style.display = "flex";
+}
+
+function closeInvoice() {
+    document.getElementById("invoice-modal").style.display = "none";
+    alert("¡Pedido simulado con éxito! Se ha enviado una copia a su correo (simulación).");
     cart = [];
     updateCartUI();
     closeAll();

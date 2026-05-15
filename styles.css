@@ -316,8 +316,107 @@ canvas {
 }
 
 /* MOBILE */
-@media (max-width: 768px) {
-    h1 { font-size: 2rem; }
-    .product-card { flex-direction: column; text-align: center; }
-    .cart-sidebar { width: 100%; right: -100%; }
+/* MODAL FACTURA */
+.invoice-modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.invoice-container {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.invoice-logo {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.invoice-title {
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.invoice-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.invoice-table th {
+    text-align: left;
+    background: #f8fafc;
+    padding: 12px;
+    font-size: 0.85rem;
+}
+
+.invoice-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.invoice-total-section {
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    margin-bottom: 30px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.invoice-footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.btn-print {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .invoice-container { padding: 20px; }
+    .invoice-info { flex-direction: column; gap: 15px; }
 }

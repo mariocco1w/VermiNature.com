@@ -443,6 +443,59 @@
 </section>
 
 
+<!-- MODAL FACTURA VIRTUAL -->
+<div class="invoice-modal" id="invoice-modal">
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <div class="invoice-logo">
+                <i class="fas fa-leaf"></i> Verminature
+            </div>
+            <div class="invoice-title">FACTURA VIRTUAL</div>
+        </div>
+        
+        <div class="invoice-info">
+            <div>
+                <strong>Verminature S.A.</strong><br>
+                Guatemala, Centroamérica<br>
+                nit: 1234567-8
+            </div>
+            <div style="text-align: right;">
+                <strong>No. Factura:</strong> <span id="inv-number">#0001</span><br>
+                <strong>Fecha:</strong> <span id="inv-date">--/--/--</span>
+            </div>
+        </div>
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th style="text-align: center;">Cant.</th>
+                    <th style="text-align: right;">Precio</th>
+                    <th style="text-align: right;">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="inv-items">
+                <!-- Items dinámicos -->
+            </tbody>
+        </table>
+
+        <div class="invoice-total-section">
+            <div class="total-row">
+                <span>Total a Pagar:</span>
+                <span id="inv-total">Q0.00</span>
+            </div>
+        </div>
+
+        <div class="invoice-footer">
+            <p>¡Gracias por su simulación de compra!</p>
+            <p>Este documento es una representación virtual con fines ilustrativos.</p>
+            <button class="btn-print" onclick="closeInvoice()">
+                <i class="fas fa-check"></i> Finalizar
+            </button>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="script.js"></script>
 </body>
