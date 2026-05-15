@@ -51,12 +51,19 @@ function updateCartUI() {
             total += item.price * item.qty;
             count += item.qty;
             container.innerHTML += `
-                <div class="cart-item">
-                    <div>
-                        <strong>${item.name}</strong><br>
-                        <small>Q${item.price.toFixed(2)} x ${item.qty}</small>
+                <div class="cart-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;">
+                    <div style="flex: 1;">
+                        <strong style="color: var(--primary-dark);">${item.name}</strong><br>
+                        <small style="color: var(--text-light);">Q${item.price.toFixed(2)} c/u</small>
                     </div>
-                    <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#e53935; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="display: flex; align-items: center; background: #f4f6f8; border-radius: 8px; padding: 2px 5px;">
+                            <button onclick="updateQty(${index}, -1)" style="background:none; border:none; padding: 5px; cursor:pointer; color: var(--primary);"><i class="fas fa-minus-circle"></i></button>
+                            <span style="min-width: 20px; text-align: center; font-weight: 600;">${item.qty}</span>
+                            <button onclick="updateQty(${index}, 1)" style="background:none; border:none; padding: 5px; cursor:pointer; color: var(--primary);"><i class="fas fa-plus-circle"></i></button>
+                        </div>
+                        <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#e53935; cursor:pointer; padding: 5px;"><i class="fas fa-trash-alt"></i></button>
+                    </div>
                 </div>
             `;
         });
@@ -64,6 +71,15 @@ function updateCartUI() {
 
     countLabel.innerText = count;
     totalLabel.innerText = `Q${total.toFixed(2)}`;
+}
+
+function updateQty(index, delta) {
+    if (cart[index].qty + delta > 0) {
+        cart[index].qty += delta;
+    } else {
+        removeFromCart(index);
+    }
+    updateCartUI();
 }
 
 function removeFromCart(index) {
