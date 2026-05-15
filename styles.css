@@ -40,6 +40,21 @@ body {
     transition: left 0.3s ease;
 }
 
+.sidebar .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sidebar .close-btn {
+        display: block;
+    }
+}
+
 .sidebar.active {
     left: 0;
 }
@@ -155,49 +170,51 @@ canvas {
 }
 
 /* ===== MOBILE ===== */
-/* ===== MOBILE ===== */
 @media (max-width: 768px) {
 
     .content {
-        padding: 90px 18px 30px 18px;
+        padding: 80px 16px 20px 16px;
         margin-left: 0;
-        width: calc(100% - 36px);
+        width: calc(100% - 32px);
         overflow-x: hidden;
     }
 
     /* sidebar tipo app */
     .sidebar {
-        width: 260px;
-        left: -260px;
+        width: 280px;
+        left: -280px;
     }
 
     .sidebar.active {
         left: 0;
     }
 
-    /* overlay oscuro */
-    .overlay.active {
-        display: block;
-    }
-
-    /* items */
+    /* items con mejor área táctil */
     .sidebar li {
-        padding: 15px;
+        padding: 18px 20px;
         font-size: 18px;
+        min-height: 48px;
     }
 
+    .sidebar li:active {
+        background: rgba(255,255,255,0.25);
+    }
+
+    /* Tipografía fluida */
     h1 {
-        font-size: 32px;
+        font-size: clamp(28px, 8vw, 36px);
+        line-height: 1.2;
     }
 
     h2 {
-        font-size: 22px;
+        font-size: clamp(20px, 6vw, 24px);
     }
 
     .card {
         padding: 20px;
         border-left: 4px solid #2e7d32;
-        border-radius: 18px;
+        border-radius: 16px;
+        margin-bottom: 20px;
     }
 
     .card p,
@@ -206,32 +223,29 @@ canvas {
         line-height: 1.6;
     }
 
-    /* animación */
-    .section {
-        transform: translateX(40px);
-        opacity: 0;
-    }
-
-    .section.active {
-        transform: translateX(0);
-        opacity: 1;
-    }
-
-    /* imágenes */
+    /* imágenes y gráficas */
     .producto-img,
     .organigrama {
         width: 100%;
         max-width: 100%;
         height: auto;
-        object-fit: cover;
+        object-fit: contain;
     }
 
-    /* gráficas */
     canvas {
         width: 100% !important;
         height: auto !important;
     }
 
+    /* Botón de menú más accesible */
+    .menu-btn {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+    }
 }
 .producto-img {
     width: 100%;
