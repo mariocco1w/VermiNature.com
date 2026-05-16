@@ -98,13 +98,13 @@ function checkout() {
     document.getElementById("inv-date").innerText = invDate;
     
     const itemsContainer = document.getElementById("inv-items");
-    itemsContainer.innerHTML = "";
     let total = 0;
+    let rowsHtml = ""; // Acumulador de filas
 
     cart.forEach(item => {
         const subtotal = item.price * item.qty;
         total += subtotal;
-        itemsContainer.innerHTML += `
+        rowsHtml += `
             <tr>
                 <td>${item.name}</td>
                 <td style="text-align: center;">${item.qty}</td>
@@ -114,6 +114,8 @@ function checkout() {
         `;
     });
 
+    // Inyectar todo el HTML de una vez
+    itemsContainer.innerHTML = rowsHtml;
     document.getElementById("inv-total").innerText = `Q${total.toFixed(2)}`;
     
     // Mostrar factura
